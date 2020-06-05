@@ -1,8 +1,7 @@
 ﻿  Function.cpp
 C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Head.h(30,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(256,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(256,18): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(256,15): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(222,7): warning C4101: 'mapPoint': unreferenced local variable
-C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(221,8): warning C4101: 'globe': unreferenced local variable
+C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(254,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(254,18): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(254,15): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Lab04\Function.cpp(226,9): warning C4101: 'spherePoint': unreferenced local variable
   Lab04.vcxproj -> C:\Users\Vy Huynh\OneDrive - VNU-HCMUS\APCS\Third Year\Term 2\CS411 - Computer graphic\Lab\Lab04\Lab04\Debug\Lab04.exe

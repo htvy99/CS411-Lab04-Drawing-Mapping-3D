@@ -21,7 +21,7 @@ void display()
 										//Clear color and depth buffer
 	glMatrixMode(GL_MODELVIEW);			//Operate on model view matrix
 
-	//********************************************************************************************************* CUBE 
+	//**********************************************************	 CUBE	***********************************************
 	//Render a color-cube consisting of 6 quads with different colors
 	glLoadIdentity();					//Reset model-view matrix
 	glTranslatef(3.0f, 0.0f, -20.0f);	//Move to the right & to the screen
@@ -75,7 +75,7 @@ void display()
 	glDisable(GL_TEXTURE_2D);
 
 
-	//********************************************************************************************************* PYRAMID 
+	//*********************************************************		PYRAMID		************************************************ 
 	//Begin drawing the pyramid with 4 triangles
 	glLoadIdentity();
 	glTranslatef(-1.5f, 0.0f, -20.0f);
@@ -115,7 +115,7 @@ void display()
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 
-	//********************************************************************************************************* CYLINDER
+	//********************************************************	CYLINDER	************************************************* 
 	glLoadIdentity();
 	glTranslatef(-3.0f, 0.0f, -10.0f);
 	glRotatef(curAngleCylinder, 0.0, 1.0, 0.0);
@@ -211,15 +211,15 @@ void display()
 	float xy;				                          // vertex position
 	float s, t;                                     // texCoord
 	radius = 0.5;
-	int sectorCount = 100;
-	int stackCount = 100;
+	int sectorCount = 300;
+	int stackCount = 300;
 
 	float sectorStep = 2 * PI / sectorCount;
 	float stackStep = PI / stackCount;
 	float sectorAngle, stackAngle;
 
-	point globe[101][101];
-	coor mapPoint[101][101];
+	//point globe[101][101];
+	//coor mapPoint[101][101];
 
 	for (int i = 0; i <= stackCount; ++i)
 	{
@@ -238,19 +238,17 @@ void display()
 			x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
 			y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
 
-			spherePoint.x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
-			spherePoint.y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
+			//spherePoint.x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
+			//spherePoint.y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
 
 			// vertex tex coord between [0, 1]
 			s = (float)j / sectorCount;
 			t = (float)i / stackCount;
 
-			coor newCoor;
+			/*coor newCoor;
 			newCoor.s = (float)j / sectorCount; 
-			newCoor.t = (float)i / stackCount;
+			newCoor.t = (float)i / stackCount;*/
 			
-			//glTexCoord2f(s, t);
-			//glColor3f(1.0, 1.0, 0.0);
 			glBegin(GL_POINTS);
 			glTexCoord2f(s, t);
 			glVertex3f(x, y, z);
@@ -279,7 +277,7 @@ void display()
 	curAngleCube -= 0.15f;
 	curAnglePyramid -= 0.2f;
 	curAngleCylinder -= 0.2f;
-	curAngleSphere -= 0.2f;
+	curAngleSphere -= 0.3f;
 }
 void timer(int value)					//Called back when timer expired
 {
