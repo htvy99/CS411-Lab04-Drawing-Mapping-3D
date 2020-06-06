@@ -83,7 +83,7 @@ void display()
 
 	//Map texture
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glBindTexture(GL_TEXTURE_2D, texture[3]);
 
 	glBegin(GL_TRIANGLES);
 		//Front
@@ -203,7 +203,7 @@ void display()
 
 	//Map texture
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[3]);
+	glBindTexture(GL_TEXTURE_2D, texture[5]);
 
 	x = 0.0;
 	y = 0.0;
@@ -217,9 +217,6 @@ void display()
 	float sectorStep = 2 * PI / sectorCount;
 	float stackStep = PI / stackCount;
 	float sectorAngle, stackAngle;
-
-	//point globe[101][101];
-	//coor mapPoint[101][101];
 
 	for (int i = 0; i <= stackCount; ++i)
 	{
@@ -238,46 +235,115 @@ void display()
 			x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
 			y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
 
-			//spherePoint.x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
-			//spherePoint.y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
-
 			// vertex tex coord between [0, 1]
 			s = (float)j / sectorCount;
 			t = (float)i / stackCount;
-
-			/*coor newCoor;
-			newCoor.s = (float)j / sectorCount; 
-			newCoor.t = (float)i / stackCount;*/
 			
 			glBegin(GL_POINTS);
 			glTexCoord2f(s, t);
 			glVertex3f(x, y, z);
 			glEnd();
-			//globe[i][j] = spherePoint;
-			//mapPoint[i][j] = newCoor;
 		}
 	}
-	/*for (int i = 0; i < 51; ++i) {
-		for (int j = 0; j < 51; ++j) {
-			//cout << "Point " << i << " " << j << endl;
-			glBegin(GL_TRIANGLES);
-			//glTexCoord2f(mapPoint[i][j].s, mapPoint[i][j].t);
-			glVertex3f(globe[i][j].x, globe[i][j].y, globe[i][j].z);
-			//glTexCoord2f(mapPoint[i + 1][j].s, mapPoint[i + 1][j].t);
-			glVertex3f(globe[i + 1][j].x, globe[i + 1][j].y, globe[i + 1][j].z);
-			//glTexCoord2f(mapPoint[i][j + 1].s, mapPoint[i][j + 1].t);
-			glVertex3f(globe[i][j + 1].x, globe[i][j + 1].y, globe[i][j + 1].z);
+
+	//********************************************************	SPHERE 2	************************************************* 
+	glLoadIdentity();
+	glTranslatef(-3.0f, 2.0f, -10.0f);
+	glRotatef(curAngleSphere, 0.0, 1.0, 0.0);
+
+	//Map texture
+	//glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[3]);
+
+	x = 0.0;
+	y = 0.0;
+	z = 0.0;
+	radius = 0.5;
+
+	for (int i = 0; i <= stackCount; ++i)
+	{
+		point spherePoint;
+		stackAngle = PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
+		xy = radius * cosf(stackAngle);             // r * cos(u)
+		z = radius * sinf(stackAngle);              // r * sin(u)
+
+		// add (sectorCount+1) vertices per stack
+		// the first and last vertices have same position and normal, but different tex coords
+		for (int j = 0; j <= sectorCount; ++j)
+		{
+			sectorAngle = j * sectorStep;           // starting from 0 to 2pi
+
+			// vertex position
+			x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
+			y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
+
+			// vertex tex coord between [0, 1]
+			s = (float)j / sectorCount;
+			t = (float)i / stackCount;
+
+			glBegin(GL_POINTS);
+			glTexCoord2f(s, t);
+			glVertex3f(x, y, z);
 			glEnd();
 		}
-	}*/
+	}
+
+	//********************************************************	CONE	************************************************* 
+	glLoadIdentity();
+	glTranslatef(1.5f, 1.5f, -10.0f);
+	glRotatef(curAngleCone, 0.0, 1.0, 0.0);
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
+
+	glBegin(GL_TRIANGLES);
+	int cnt = 0;
+	for (int i = 0; i <= 360; i += 10) {
+		float d = rad(i);
+		float d1 = rad(i + 10);
+
+		glTexCoord2f(0.5, 0.5);
+		glVertex3f(0, 1, 0);
+		glTexCoord2f(cos(d) / 2 + 0.5, sin(d) / 2 + 0.5);
+		glVertex3f(cos(d), 0, sin(d));
+		glTexCoord2f(cos(d1) / 2 + 0.5, sin(d1) / 2 + 0.5);
+		glVertex3f(cos(d1), 0, sin(d1));
+
+		glTexCoord2f(0.5, 0.5);
+		glVertex3f(0, 0, 0);
+		glTexCoord2f(cos(d) / 2 + 0.5, sin(d) / 2 + 0.5);
+		glVertex3f(cos(d), 0, sin(d));
+		glTexCoord2f(cos(d1) / 2 + 0.5, sin(d1) / 2 + 0.5);
+		glVertex3f(cos(d1), 0, sin(d1));
+	}
+	glEnd();
+
+	//********************************************************	RING	*************************************************
+	glLoadIdentity();
+	glTranslatef(-1.0f, -2.0f, -10.0f);
+	glRotatef(curAngleCone, 0.0, 1.0, 0.0);
+	glBindTexture(GL_TEXTURE_2D, texture[3]);
+
+	glBegin(GL_TRIANGLE_STRIP);
+	for (int i = 0; i < 360; i += 20) {
+		float di = rad(i);
+		float di1 = rad(i + 20);
+		for (int j = 0; j <= 360; j += 20) {
+			float dj = rad(j);
+			glTexCoord2f(((1 + 0.25 * cos(dj)) * cos(di1)) / 2.5 + 0.5, sin(dj) / 2 + 0.5);
+			glVertex3f((1 + 0.25 * cos(dj)) * cos(di1), 0.25 * sin(dj), (1 + 0.25 * cos(dj)) * sin(di1));
+			glTexCoord2f(((1 + 0.25 * cos(dj)) * cos(di)) / 2.5 + 0.5, sin(dj) / 2 + 0.5);
+			glVertex3f((1 + 0.25 * cos(dj)) * cos(di), 0.25 * sin(dj), (1 + 0.25 * cos(dj)) * sin(di));
+		}
+	}
+	glEnd();
 
 	glutSwapBuffers();
 
 	//Update rotational angle after each refresh
-	curAngleCube -= 0.15f;
-	curAnglePyramid -= 0.2f;
-	curAngleCylinder -= 0.2f;
-	curAngleSphere -= 0.3f;
+	curAngleCube -= 1.0f;
+	curAnglePyramid -= 1.0f;
+	curAngleCylinder -= 1.0f;
+	curAngleSphere -= 1.0f;
+	curAngleCone -= 1.0f;
 }
 void timer(int value)					//Called back when timer expired
 {
@@ -329,6 +395,19 @@ int loadGLTexttures()					//Load bitmaps and convert to textures
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_INVERT_Y
 	);
+	texture[4] = SOIL_load_OGL_texture(
+		"Data/img4.jpeg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+	);
+	texture[5] = SOIL_load_OGL_texture(
+		"Data/img5.jpeg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+	);
+
 	
 	for (int i = 0; i < textureSize; ++i) {
 		if (texture[i] == 0)
